@@ -7,14 +7,13 @@ class ListView extends Component {
     return (
       <div className="listview">
         {
-          this.props.data.map((a, i) => {
+          this.props.data.length !== 0 && this.props.data.length !== undefined ? (this.props.data.map((a, i) => {
             return (
-              <div className="row" key={a}>
-                <Link to={`/detail/${i.name}`}>{i.name}</Link>
+              <div className="row" key={i}>
+                <Link to={`/detail/${a.name}`}>{i.name}</Link>
               </div>
             )
-          })
-
+          })): 'NO Data Available'
         }
       </div>
     );
