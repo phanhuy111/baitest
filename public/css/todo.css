@@ -1,0 +1,28 @@
+input.search {
+    width: 500px;
+    height: 45px;
+    margin-left: 120px;
+    border-right: 0;
+}
+
+button.search {
+    width: 60px;
+    height: 45px;
+    background-color: whitesmoke;
+    border: 1px solid transparent;
+    cursor: pointer;
+}
+
+.listview {
+    float: right;
+    margin-top: 121px;
+}
+
+.box {
+    display: -webkit-box;
+    padding: 24px 12px;
+}
+
+.box p{
+    cursor: pointer;
+}
