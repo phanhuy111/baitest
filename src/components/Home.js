@@ -73,7 +73,7 @@ class Home extends Component {
                 </div>
                 <div className="listview">
                     {
-                        data.map((e, i) => {
+                        (data !== undefined && data.length != 0) ? this.state.data.map((e, i) => {
                             return (
                                 <div className="modalP" key={i}>
                                     <div className="right">
@@ -95,7 +95,7 @@ class Home extends Component {
                                     </div>
                                 </div>
                             )
-                        })
+                        }) : ''
                     }
                 </div>
             </div>
