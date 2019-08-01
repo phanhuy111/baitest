@@ -115,15 +115,15 @@ const mapDispatchToProps = (dispatch) => {
 
 
 const mapStateToProps = (state) => {
-    console.log(state)
+    console.log(state.firestore)
     return {
         museum: state.firestore.ordered.museum
     }
 }
 
 export default compose(
-    connect(mapStateToProps, mapDispatchToProps),
     firestoreConnect([
         { collection: 'museum' }
-    ])
+    ]),
+    connect(mapStateToProps, mapDispatchToProps)
 )(Home)
