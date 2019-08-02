@@ -34,6 +34,14 @@ a {
     font-weight: 800;
 }
 
+a:hover{
+    color: black;
+    text-decoration: none;
+    font-size: 17px;
+    font-family: inherit;
+    font-weight: 800;
+}
+
 .location {
     margin: 12px;
 }
@@ -80,13 +88,13 @@ img.logoImage {
 
 .right1 {
     width: 50%;
-    padding: 65px 58px;
+    padding: 18px 58px;
 }
 
 .left1 {
     width: 46%;
     padding: 15px;
-    margin-left: -80px;
+    margin-left: -35px;
 }
 
 .location1 {

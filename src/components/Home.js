@@ -7,6 +7,7 @@ import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import Fuse from 'fuse.js';
 import { IoMdAirplane, IoIosSearch } from "react-icons/io";
+import ListView from './ListView'
 
 class Home extends Component {
     constructor(props) {
@@ -49,7 +50,7 @@ class Home extends Component {
 
     render() {
         const { data } = this.state
-        console.log(data)
+        const data1 = (data !== undefined && data.length !== 0) ? data : []
         return (
             <div className="all">
                 <div className="all-search">
@@ -71,33 +72,7 @@ class Home extends Component {
                         placeholder="Tìm kiếm" />
                     <IoIosSearch />
                 </div>
-                <div className="listview">
-                    {
-                        (data !== undefined && data.length != 0) ? this.state.data.map((e, i) => {
-                            return (
-                                <div className="modalP" key={i}>
-                                    <div className="right">
-                                        <div className="image">
-                                            <img src={e.urlImage} alt='' />
-                                        </div>
-                                    </div>
-                                    <div className="left">
-                                        <Link to={`/detail/${e._id}`} className="name">
-                                            {e.name}
-                                        </Link>
-                                        <div className="location">
-                                            <IoMdAirplane />
-                                            {e.location}
-                                        </div>
-                                        <div className="description">
-                                            {e.description.substr(0, 150)}
-                                        </div>
-                                    </div>
-                                </div>
-                            )
-                        }) : ''
-                    }
-                </div>
+                <ListView data={data1} />
             </div>
         );
     }
@@ -107,15 +82,14 @@ class Home extends Component {
 
 
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        // getAGoal: (id) => { dispatch(getAGoal(id))}
-    }
-}
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         // getAGoal: (id) => { dispatch(getAGoal(id))}
+//     }
+// }
 
 
 const mapStateToProps = (state) => {
-    console.log(state.firestore)
     return {
         museum: state.firestore.ordered.museum
     }
@@ -125,5 +99,5 @@ export default compose(
     firestoreConnect([
         { collection: 'museum' }
     ]),
-    connect(mapStateToProps, mapDispatchToProps)
+    connect(mapStateToProps, null)
 )(Home)

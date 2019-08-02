@@ -2,12 +2,15 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { IoMdAirplane, IoIosArrowBack } from "react-icons/io";
 import { Link } from 'react-router-dom'
+import { compose } from 'redux';
+import { firestoreConnect } from 'react-redux-firebase';
 
-class DetailQuestion extends Component {
+
+class Detail extends Component {
 
   render() {
     const { museum } = this.props;
-    const details = museum.filter((i) => { return i._id === this.props.match.params.ID });
+    const details = (museum != undefined && museum.length != 0) ? museum.filter((i) => { return i.id === this.props.match.params.ID }) : [];
     return (
       <div className="chitietcauhoi" >
         <div className="back">
@@ -17,24 +20,24 @@ class DetailQuestion extends Component {
         </div>
         <div className="cauhoi">
           {
-            details.map((detail) => {
+            (details !== undefined && details.length !== 0) ? details.map((e, i) => {
               return (
-                <div className='detail' key={detail.id}>
+                <div className='detail' key={i}>
                   <div className="right1">
                     <div className='title1'>
                       <h1>
-                        {detail.name}
+                        {e.name}
                       </h1>
                     </div>
                     <div className='image1'>
-                      <img src={detail.urlImage} alt='' />
+                      <img src={e.urlImage} alt='' />
                     </div>
                     <div className="location1">
                       <IoMdAirplane />
-                      {detail.location}
+                      {e.location}
                     </div>
                     <div className="des1">
-                      {detail.description}
+                      {e.description}
                     </div>
                   </div>
                   <div className="left1">
@@ -44,7 +47,7 @@ class DetailQuestion extends Component {
                   </div>
                 </div>
               )
-            })
+            }) : ''
           }
         </div>
 
@@ -54,10 +57,15 @@ class DetailQuestion extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state)
+  // console.log(state)
   return {
     museum: state.firestore.ordered.museum
   }
 }
 
-export default connect(mapStateToProps, null)(DetailQuestion)
+export default compose(
+  firestoreConnect([
+    { collection: 'museum' }
+  ]),
+  connect(mapStateToProps, null)
+)(Detail)
